@@ -13,6 +13,7 @@ if os.geteuid() != 0:
 #load environment vars
 load_dotenv()
 wlan_name=os.getenv('WLAN_NAME')
+monitor_name=os.getenv('MONITOR_NAME')
 
 
 #check wifi interface
@@ -41,7 +42,7 @@ if WIFI_DISABLE:
 def goodbye():
 	print("\nGoodbye!")
 	if WIFI_DISABLE:
-		os.system("airmon-ng stop wlan0mon")
+		os.system("airmon-ng stop "+monitor_name)
 		os.system("sudo service NetworkManager restart")
 
 
