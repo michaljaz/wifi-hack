@@ -48,7 +48,7 @@ def goodbye():
 
 #run aircrack
 os.system("sudo airmon-ng start "+wlan_name)
-
+os.system("sudo airodump-ng "+monitor_name)
 
 #flask
 app = Flask(__name__)
