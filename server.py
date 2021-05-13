@@ -2,6 +2,7 @@ from flask import Flask,render_template
 from dotenv import load_dotenv
 import os,multiprocessing,subprocess,atexit,psutil
 
+WIFI_DISABLE=False
 
 #check privs
 if os.geteuid() != 0:
@@ -31,22 +32,20 @@ if not wlan_name in available_networks:
 
 
 #kill all wifi processes
-os.system("sudo airmon-ng check kill")
+if WIFI_DISABLE:
+	os.system("sudo airmon-ng check kill")
 
 
 #restore wifi on exit
 @atexit.register
 def goodbye():
-	print("Goodbye!")
-	os.system("sudo service NetworkManager restart")
+	print("\nGoodbye!")
+	if WIFI_DISABLE:
+		os.system("sudo service NetworkManager restart")
 
 
-#run aircrack in background
-def runInBackground():
-	os.system("sudo airmon-ng start "+wlan_name)
-
-p=multiprocessing.Process(target=runInBackground)
-p.start()
+#run aircrack
+os.system("sudo airmon-ng start "+wlan_name)
 
 
 #flask
