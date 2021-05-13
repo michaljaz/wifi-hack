@@ -1,6 +1,8 @@
 # wifi-hack
 Wifi hacking panel written in python
 
-## Running
+## Usage
 
-``` python server.py ``` - This will start web server on http://localhost:8080
+```sudo pip install -r requirements.txt``` - install python libraries
+
+```sudo python server.py ``` - This will start web server on http://localhost:8080

@@ -1,8 +1,16 @@
 from flask import Flask,render_template
-import multiprocessing
 from time import sleep
+import os,multiprocessing,subprocess
+from dotenv import load_dotenv
 
+load_dotenv()
 app = Flask(__name__)
+
+wlan_name=os.getenv('WLAN_NAME')
+
+if os.geteuid() != 0:
+	print("This script requires sudo privs!")
+	exit()
 
 @app.route('/')
 def index():
@@ -15,5 +23,5 @@ def runApp():
 if __name__ == '__main__':
 	p=multiprocessing.Process(target=runApp)
 	p.start()
-sleep(2)
-print('test')
+
+os.system("sudo airmon-ng start "+wlan_name)
