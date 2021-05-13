@@ -3,6 +3,15 @@ Wifi hacking panel written in python
 
 ## Usage
 
-```sudo pip install -r requirements.txt``` - install python libraries
+```bash
+#install aircrack-ng
+sudo apt-get update
+sudo apt-get install -y aircrack-ng
 
-```sudo python server.py ``` - This will start web server on http://localhost:8080
+#install python libraries
+sudo pip install -r requirements.txt
+
+#This will start web server on http://localhost:8080
+sudo python server.py
+
+```
