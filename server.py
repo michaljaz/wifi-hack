@@ -40,15 +40,20 @@ if WIFI_DISABLE:
 #restore wifi on exit
 @atexit.register
 def goodbye():
-	print("\nGoodbye!")
+	os.remove("log-01.csv")
 	if WIFI_DISABLE:
 		os.system("airmon-ng stop "+monitor_name)
 		os.system("sudo service NetworkManager restart")
+	print("\nGoodbye!")
 
 
 #run aircrack
 os.system("sudo airmon-ng start "+wlan_name)
-os.system("sudo airodump-ng "+monitor_name)
+
+def runAircrack():
+	os.system("sudo airodump-ng -w log --output-format csv "+monitor_name+" > /dev/null 2>&1")
+multiprocessing.Process(target=runAircrack).start()
+
 
 #flask
 app = Flask(__name__)
