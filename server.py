@@ -2,7 +2,7 @@ from flask import Flask,render_template
 from dotenv import load_dotenv
 import os,multiprocessing,subprocess,atexit,psutil
 
-WIFI_DISABLE=False
+WIFI_DISABLE=True
 
 #check privs
 if os.geteuid() != 0:
@@ -41,6 +41,7 @@ if WIFI_DISABLE:
 def goodbye():
 	print("\nGoodbye!")
 	if WIFI_DISABLE:
+		os.system("airmon-ng stop wlan0mon")
 		os.system("sudo service NetworkManager restart")
 
 
