@@ -1,8 +1,8 @@
-from flask import Flask,render_template
+from flask import Flask,render_template,url_for
 from dotenv import load_dotenv
 import os,multiprocessing,subprocess,atexit,psutil
 
-WIFI_DISABLE=True
+WIFI_DISABLE=False
 
 #check privs
 if os.geteuid() != 0:
@@ -41,8 +41,8 @@ if WIFI_DISABLE:
 @atexit.register
 def goodbye():
 	os.remove("log-01.csv")
+	os.system("airmon-ng stop "+monitor_name)
 	if WIFI_DISABLE:
-		os.system("airmon-ng stop "+monitor_name)
 		os.system("sudo service NetworkManager restart")
 	print("\nGoodbye!")
 
@@ -51,7 +51,7 @@ def goodbye():
 os.system("sudo airmon-ng start "+wlan_name)
 
 def runAircrack():
-	os.system("sudo airodump-ng -w log --output-format csv "+monitor_name+" > /dev/null 2>&1")
+	os.system("sudo airodump-ng -w log --output-format csv "+monitor_name+" > /dev/null 2>&1")	
 multiprocessing.Process(target=runAircrack).start()
 
 
