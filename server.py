@@ -1,7 +1,8 @@
-from flask import Flask,render_template,url_for
+from flask import Flask,render_template,jsonify,make_response
 from dotenv import load_dotenv
+import time
 import os,multiprocessing,subprocess,atexit,psutil
-
+import csv
 WIFI_DISABLE=False
 
 #check privs
@@ -61,6 +62,19 @@ app = Flask(__name__)
 @app.route('/')
 def index():
 	return render_template("index.html")
+
+
+@app.route('/api/data/')
+def data():
+	with open('log-01.csv', 'r') as file:
+		reader = csv.reader(file)
+		db=[]
+		for row in reader:
+			xd=[]
+			for col in row:
+				xd.append(col)
+			db.append(xd)
+		return make_response(jsonify(db), 200)
 
 app.run(port=8080)
 
