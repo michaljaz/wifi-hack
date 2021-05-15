@@ -75,6 +75,10 @@ def data():
 			db.append(xd)
 		return make_response(jsonify(db), 200)
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
 app.run(port=8080)
 
 
