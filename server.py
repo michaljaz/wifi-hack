@@ -3,7 +3,9 @@ from dotenv import load_dotenv
 import time
 import os,multiprocessing,subprocess,atexit,psutil
 import csv
+
 WIFI_DISABLE=False
+PORT=8080
 
 #check privs
 if os.geteuid() != 0:
@@ -55,6 +57,13 @@ def runAircrack():
 	os.system("sudo airodump-ng -w log --output-format csv "+monitor_name+" > /dev/null 2>&1")	
 multiprocessing.Process(target=runAircrack).start()
 
+#adb connector
+def connectAdb():
+	while True:
+		os.system("adb reverse tcp:"+str(PORT)+" tcp:"+str(PORT))
+		time.sleep(10)
+multiprocessing.Process(target=connectAdb).start()
+
 
 #flask
 app = Flask(__name__)
@@ -79,7 +88,7 @@ def data():
 def page_not_found(e):
     return render_template('404.html'), 404
 
-app.run(port=8080)
+app.run(port=PORT)
 
 
 
