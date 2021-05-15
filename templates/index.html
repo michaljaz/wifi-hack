@@ -6,7 +6,12 @@
 </head>
 <body>
 	<div class="container">
-		hello world
+		<div class="m-1">
+			<button class="btn btn-primary w-100 mb-1">Near wifis</button>
+			<button class="btn btn-info w-100 mb-1">Probe requests</button>
+			<button class="btn btn-danger w-100 mb-1">Create own AP</button>
+		</div>
+		
 	</div>
 	<script>
 $.get("/api/data/",(data)=>{

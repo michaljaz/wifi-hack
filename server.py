@@ -63,7 +63,6 @@ app = Flask(__name__)
 def index():
 	return render_template("index.html")
 
-
 @app.route('/api/data/')
 def data():
 	with open('log-01.csv', 'r') as file:
