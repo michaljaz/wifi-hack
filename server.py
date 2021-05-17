@@ -72,6 +72,18 @@ app = Flask(__name__)
 def index():
 	return render_template("index.html")
 
+@app.route('/probes/')
+def probes():
+	return render_template("probes.html")
+
+@app.route('/ownap/')
+def ownap():
+	return render_template("ownap.html")
+
+@app.route('/nearwifis/')
+def nearwifis():
+	return render_template("nearwifis.html")
+
 @app.route('/api/data/')
 def data():
 	with open('log-01.csv', 'r') as file:

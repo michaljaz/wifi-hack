@@ -1,22 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Panel</title>
-	{% include 'head.html' %}
-</head>
-<body>
-	<div class="container">
-		<div class="m-1">
-			<button class="btn btn-primary w-100 mb-1">Near wifis</button>
-			<button class="btn btn-info w-100 mb-1">Probe requests</button>
-			<button class="btn btn-danger w-100 mb-1">Create own AP</button>
-		</div>
-		
-	</div>
-	<script>
+{% extends 'base.html' %}
+
+{% block title %} Panel {% endblock %}
+
+{% block content %}
+<a class="btn btn-primary w-100 mb-1" href="/nearwifis/">Near wifis</a>
+<a class="btn btn-info w-100 mb-1" href="/probes/">Probe requests</a>
+<a class="btn btn-danger w-100 mb-1" href="/ownap/">Create own AP</a>
+{% endblock %}
+
+{% block script %}
 $.get("/api/data/",(data)=>{
 	console.log(data)
 })
-	</script>
-</body>
-</html>
+{% endblock %}
