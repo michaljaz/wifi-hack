@@ -66,6 +66,21 @@ multiprocessing.Process(target=connectAdb).start()
 
 
 #flask
+def delSpacesList(l):
+	result=[]
+	for string in l:
+		if not (string is " " or string is ""):
+			while string[0] is " ":
+				if string is " " or string is "":
+					break
+				string=string[1:]
+			while string[-1] is " ":
+				if string is " " or string is "":
+					break
+				string=string[:-2]
+		result.append(string)
+	return result
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -86,6 +101,10 @@ def nearwifis():
 
 @app.route('/api/data/')
 def data():
+	result={
+		"aps":[],
+		"stations":[]
+	}
 	with open('log-01.csv', 'r') as file:
 		reader = csv.reader(file)
 		db=[]
@@ -94,7 +113,17 @@ def data():
 			for col in row:
 				xd.append(col)
 			db.append(xd)
-		return make_response(jsonify(db), 200)
+		b=0
+		for i in range(2,len(db)):
+			if len(db[i]) is 0:
+				b=i
+				break
+		for i in range(2,b):
+
+			result["aps"].append(delSpacesList(db[i]))
+		for i in range(b+2,len(db)-1):
+			result["stations"].append(delSpacesList(db[i]))
+		return make_response(jsonify(result), 200)
 
 @app.errorhandler(404)
 def page_not_found(e):

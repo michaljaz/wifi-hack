@@ -7,9 +7,3 @@
 <a class="btn btn-info w-100 mb-1" href="/probes/">Probe requests</a>
 <a class="btn btn-danger w-100 mb-1" href="/ownap/">Create own AP</a>
 {% endblock %}
-
-{% block script %}
-$.get("/api/data/",(data)=>{
-	console.log(data)
-})
-{% endblock %}

@@ -5,3 +5,17 @@
 {% block content %}
 <a href="/" class="btn btn-primary">Back</a>
 {% endblock %}
+
+{% block script %}
+<script>
+$.get("/api/data/",(data)=>{
+	// const re
+	// for(let i=0;i<data.length;i++){
+	// 	if(i>=2){
+
+	// 	}
+	// }
+	console.log(data)
+})
+</script>
+{% endblock %}
