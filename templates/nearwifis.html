@@ -12,9 +12,18 @@
 {% block script %}
 <script>
 $.get("/api/data/",(data)=>{
+	data.aps.sort((a,b)=>{
+		if(parseInt(a[8])>parseInt(b[8])){
+			return -1;
+		}else{
+			return 1;
+		}
+	})
 	for(let i=0;i<data.aps.length;i++){
+		const dbm=parseInt(data.aps[i][12])
 		$(".wifis").append(`<a class="btn btn-primary mb-1 w-100 p-3">${data.aps[i][13]}</a>`)
 	}
+	console.log(data)
 })
 </script>
 {% endblock %}
