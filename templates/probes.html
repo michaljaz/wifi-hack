@@ -3,5 +3,24 @@
 {% block title %} Probes {% endblock %}
 
 {% block content %}
-<a href="/" class="btn btn-primary">Back</a>
+<a href="/" class="btn btn-primary mb-1">Back</a>
+<div class="wifis">
+
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+$.get("/api/data/",(data)=>{
+	for(let i=0;i<data.stations.length;i++){
+		for(let j=6;j<data.stations[i].length;j++){
+			if(data.stations[i][j]!==""){
+				$(".wifis").append(`<a class="btn btn-primary mb-1 w-100 p-3">${data.stations[i][j]}</a>`)
+			}
+			
+		}
+	}
+	console.log(data)
+})
+</script>
 {% endblock %}

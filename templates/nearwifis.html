@@ -15,7 +15,6 @@ $.get("/api/data/",(data)=>{
 	for(let i=0;i<data.aps.length;i++){
 		$(".wifis").append(`<a class="btn btn-primary mb-1 w-100 p-3">${data.aps[i][13]}</a>`)
 	}
-	console.log(data)
 })
 </script>
 {% endblock %}
