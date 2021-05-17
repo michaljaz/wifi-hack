@@ -3,18 +3,18 @@
 {% block title %} Near wifis {% endblock %}
 
 {% block content %}
-<a href="/" class="btn btn-primary">Back</a>
+<a href="/" class="btn btn-primary mb-1">Back</a>
+<div class="wifis">
+
+</div>
 {% endblock %}
 
 {% block script %}
 <script>
 $.get("/api/data/",(data)=>{
-	// const re
-	// for(let i=0;i<data.length;i++){
-	// 	if(i>=2){
-
-	// 	}
-	// }
+	for(let i=0;i<data.aps.length;i++){
+		$(".wifis").append(`<a class="btn btn-primary mb-1 w-100 p-3">${data.aps[i][13]}</a>`)
+	}
 	console.log(data)
 })
 </script>
