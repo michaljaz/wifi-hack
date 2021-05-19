@@ -3,5 +3,109 @@
 {% block title %} Ownap {% endblock %}
 
 {% block content %}
-<a href="/" class="btn btn-primary">Back</a>
+<a href="/" class="btn btn-primary mb-1">Back</a>
+<div class="row">
+	<div class="col-md-6">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title"><a>Configuration</a></h4>
+
+				<!-- ESSID -->
+				<div class="form-group">
+					<label for="exampleFormControlInput0">Essid (Name)</label>
+					<input type="text" class="form-control" id="exampleFormControlInput0" placeholder="">
+				</div>
+
+				<!-- CHANNEL -->
+				<select class="custom-select">
+				  	<option value="1">channel 1</option>
+				  	<option value="2">channel 2</option>
+				  	<option value="3">channel 3</option>
+				  	<option value="4">channel 4</option>
+				  	<option value="5">channel 5</option>
+				  	<option value="6">channel 6</option>
+				  	<option value="7">channel 7</option>
+				  	<option value="8">channel 8</option>
+				  	<option value="9">channel 9</option>
+				  	<option value="10">channel 10</option>
+				  	<option value="11">channel 11</option>
+				  	<option value="12">channel 12</option>
+				</select>
+
+				<!-- SECURITY PASSWORD -->
+				<div class="custom-control custom-switch">
+					<input type="checkbox" class="custom-control-input" id="customSwitch1" data-toggle="collapse" data-target="#collapse1">
+					<label class="custom-control-label" for="customSwitch1">Password protection</label>
+				</div>
+				<div class="form-group collapse" id="collapse1">
+					<label for="exampleFormControlInput1">Wifi password</label>
+					<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+				</div>
+
+				<!-- OWN BSSID -->
+				<div class="custom-control custom-switch">
+					<input type="checkbox" class="custom-control-input" id="customSwitch2" data-toggle="collapse" data-target="#collapse2">
+					<label class="custom-control-label" for="customSwitch2">Own bssid</label>
+				</div>
+				<div class="form-group collapse" id="collapse2">
+					<label for="exampleFormControlInput2">Enter custom bssid</label>
+					<input type="text" class="form-control" id="exampleFormControlInput2" placeholder="example: 24:A4:3C:AE:DF:83">
+				</div>
+
+				<!-- CAPTIVE PORTAL -->
+				<div class="custom-control custom-switch">
+					<input type="checkbox" class="custom-control-input" id="customSwitch3" data-toggle="collapse" data-target="#collapse3">
+					<label class="custom-control-label" for="customSwitch3">Captive Portal</label>
+				</div>
+				<div class="form-group collapse" id="collapse3">
+					<label for="exampleFormControlInput3">Select captive portal type</label>
+					<select class="custom-select" id="exampleFormControlInput3">
+				  		<option value="1">Wifi login</option>
+					  	<option value="2">Firmware update</option>
+					  	<option value="3">TrollFace</option>
+					</select>
+				</div>
+				
+				<div class="mt-3">
+					<button class="btn btn-success run" onclick="run()">
+						RUN
+					</button>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	<div class="col-md-6">
+		<div class="card">
+			<div class="card-header">
+		  		<center>
+		  			<div>
+			  			Logs
+			  		</div>
+		  			<select class="browser-default custom-select">
+					  	<option selected>All</option>
+					  	<option value="1">Accesspoint</option>
+					  	<option value="2">Clients</option>
+					  	<option value="3">Dns spoof</option>
+					  	<option value="4">Captive portal</option>
+					</select>
+			    </center>
+		  	</div>
+			<div class="card-body" style="overflow:auto; display:flex; flex-direction:column-reverse;;height:300px;">
+				
+				<div class="logs">
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+function run (){
+	console.log("Ready")
+}
+</script>
 {% endblock %}
