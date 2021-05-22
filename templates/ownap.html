@@ -13,11 +13,11 @@
 				<!-- ESSID -->
 				<div class="form-group">
 					<label for="exampleFormControlInput0">Essid (Name)</label>
-					<input type="text" class="form-control" id="exampleFormControlInput0" placeholder="">
+					<input type="text" class="form-control essid" id="exampleFormControlInput0" placeholder="">
 				</div>
 
 				<!-- CHANNEL -->
-				<select class="custom-select">
+				<select class="custom-select channel">
 				  	<option value="1">channel 1</option>
 				  	<option value="2">channel 2</option>
 				  	<option value="3">channel 3</option>
@@ -34,32 +34,32 @@
 
 				<!-- SECURITY PASSWORD -->
 				<div class="custom-control custom-switch">
-					<input type="checkbox" class="custom-control-input" id="customSwitch1" data-toggle="collapse" data-target="#collapse1">
+					<input type="checkbox" class="custom-control-input passwordEnabled" id="customSwitch1" data-toggle="collapse" data-target="#collapse1">
 					<label class="custom-control-label" for="customSwitch1">Password protection</label>
 				</div>
 				<div class="form-group collapse" id="collapse1">
 					<label for="exampleFormControlInput1">Wifi password</label>
-					<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+					<input type="text" class="form-control password" id="exampleFormControlInput1" placeholder="">
 				</div>
 
 				<!-- OWN BSSID -->
 				<div class="custom-control custom-switch">
-					<input type="checkbox" class="custom-control-input" id="customSwitch2" data-toggle="collapse" data-target="#collapse2">
+					<input type="checkbox" class="custom-control-input ownBssidEnabled" id="customSwitch2" data-toggle="collapse" data-target="#collapse2">
 					<label class="custom-control-label" for="customSwitch2">Own bssid</label>
 				</div>
 				<div class="form-group collapse" id="collapse2">
 					<label for="exampleFormControlInput2">Enter custom bssid</label>
-					<input type="text" class="form-control" id="exampleFormControlInput2" placeholder="example: 24:A4:3C:AE:DF:83">
+					<input type="text" class="form-control ownBssid" id="exampleFormControlInput2" placeholder="example: 24:A4:3C:AE:DF:83">
 				</div>
 
 				<!-- CAPTIVE PORTAL -->
 				<div class="custom-control custom-switch">
-					<input type="checkbox" class="custom-control-input" id="customSwitch3" data-toggle="collapse" data-target="#collapse3">
+					<input type="checkbox" class="custom-control-input captivePortalEnabled" id="customSwitch3" data-toggle="collapse" data-target="#collapse3">
 					<label class="custom-control-label" for="customSwitch3">Captive Portal</label>
 				</div>
 				<div class="form-group collapse" id="collapse3">
 					<label for="exampleFormControlInput3">Select captive portal type</label>
-					<select class="custom-select" id="exampleFormControlInput3">
+					<select class="custom-select captivePortal" id="exampleFormControlInput3">
 				  		<option value="1">Wifi login</option>
 					  	<option value="2">Firmware update</option>
 					  	<option value="3">TrollFace</option>
@@ -106,6 +106,16 @@
 <script>
 function run (){
 	console.log("Ready")
+	const essid=$(".essid").val()
+	const channel=$(".channel").val()
+	const passwordEnabled=$(".passwordEnabled").val()
+	const password=$(".password").val()
+	const ownBssidEnabled=$(".ownBssidEnabled").val()
+	const ownBssid=$(".ownBssid").val()
+	const captivePortalEnabled=$(".captivePortalEnabled").val()
+	const captivePortal=$(".captivePortal").val()
+	
+	console.log(essid,channel,passwordEnabled,password,ownBssidEnabled,ownBssid,captivePortalEnabled,captivePortal)
 }
 </script>
 {% endblock %}
