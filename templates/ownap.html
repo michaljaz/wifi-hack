@@ -108,14 +108,22 @@ function run (){
 	console.log("Ready")
 	const essid=$(".essid").val()
 	const channel=$(".channel").val()
-	const passwordEnabled=$(".passwordEnabled").val()
+	const passwordEnabled=$(".passwordEnabled").is(":checked")
 	const password=$(".password").val()
-	const ownBssidEnabled=$(".ownBssidEnabled").val()
+	const ownBssidEnabled=$(".ownBssidEnabled").is(":checked")
 	const ownBssid=$(".ownBssid").val()
-	const captivePortalEnabled=$(".captivePortalEnabled").val()
+	const captivePortalEnabled=$(".captivePortalEnabled").is(":checked")
 	const captivePortal=$(".captivePortal").val()
-	
-	console.log(essid,channel,passwordEnabled,password,ownBssidEnabled,ownBssid,captivePortalEnabled,captivePortal)
+
+	const data={
+		essid,channel,passwordEnabled,password,ownBssidEnabled,ownBssid,captivePortalEnabled,captivePortal
+	}
+
+	console.log(data)
+
+	$.post("/api/ownap/",data,(r)=>{
+		console.log(r)
+	})
 }
 </script>
 {% endblock %}

@@ -1,4 +1,4 @@
-from flask import Flask,render_template,jsonify,make_response
+from flask import Flask,render_template,jsonify,make_response,request
 from dotenv import load_dotenv
 import time
 import os,multiprocessing,subprocess,atexit,psutil
@@ -44,7 +44,7 @@ if WIFI_DISABLE:
 @atexit.register
 def goodbye():
 	os.remove("log-01.csv")
-	os.system("airmon-ng stop "+monitor_name)
+	os.system("airmon-ng stop "+monitor_name+" > /dev/null")
 	if WIFI_DISABLE:
 		os.system("sudo service NetworkManager restart")
 	print("\nGoodbye!")
@@ -59,9 +59,12 @@ multiprocessing.Process(target=runAircrack).start()
 
 #adb connector
 def connectAdb():
-	while True:
-		os.system("adb reverse tcp:"+str(PORT)+" tcp:"+str(PORT))
-		time.sleep(10)
+	try:
+		while True:
+			os.system("adb reverse tcp:"+str(PORT)+" tcp:"+str(PORT))
+			time.sleep(10)
+	except:
+		pass
 multiprocessing.Process(target=connectAdb).start()
 
 
@@ -100,7 +103,7 @@ def nearwifis():
 	return render_template("nearwifis.html")
 
 @app.route('/api/data/')
-def data():
+def api_data():
 	result={
 		"aps":[],
 		"stations":[]
@@ -124,6 +127,11 @@ def data():
 		for i in range(b+2,len(db)-1):
 			result["stations"].append(delSpacesList(db[i]))
 		return make_response(jsonify(result), 200)
+
+@app.route('/api/ownap/', methods = ['POST'])
+def api_ownap():
+	print(json.loads(request.data))
+	return "Starting custom access point"
 
 @app.errorhandler(404)
 def page_not_found(e):
